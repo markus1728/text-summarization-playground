@@ -11,7 +11,7 @@ example_text_2 = """Silver half dimes had been struck from the early days of the
    suggested, allowing Wharton to sell more of the metal to the government. """
 
 example_text_3 = """So, keep working. Keep striving. Never give up. Fall down seven times, get up eight. 
-   Ease is a much greater threat to progress than hardship. Ease is a greater threat to progress than hardship. So, keep moving, keep growing, keep learning. See you at work. """
+   Ease is a greater threat to progress than hardship. Ease is a greater threat to progress than hardship. So, keep moving, keep growing, keep learning. See you at work. """
 
 example_text_4 = """ An explosion at an industrial park in China's Sichuan province has left 19 people dead and 12 others injured, officials say. 
    In a statement quoted by Reuters, the authorities in Jiang'an county said the blast happened at a chemical plant run by Yibin Hengda Technology. 

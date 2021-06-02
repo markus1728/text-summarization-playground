@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # waiting circle
 
-# popup explanation
+# popup explanations
 # explanation of algos
 
 @app.route('/')

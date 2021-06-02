@@ -99,8 +99,7 @@ def generate_summaries(input_text, selected_algorithms, amount_sentences_in_summ
             model_t5 = T5ForConditionalGeneration.from_pretrained('t5-large')
             tokenizer = T5Tokenizer.from_pretrained('t5-large')
         input_ids = tokenizer.encode("summarize: " + input_text, return_tensors='pt', max_length=1024, truncation=True)
-        summary_ids = model_t5.generate(input_ids, max_length=1000, min_length=40,  length_penalty=2.0,  num_beams=4,
-                                        early_stopping=True)
+        summary_ids = model_t5.generate(input_ids, max_length=1000, min_length=40,  length_penalty=2.0,  num_beams=4,  early_stopping=True)
         t5_summary = tokenizer.decode(summary_ids[0])
         t5_summary = t5_summary.replace("<pad>", ""). replace("</s>", "")
         t5_summary = sent_tokenize(t5_summary)
