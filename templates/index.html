@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            let checkBoxT5 = document.getElementById("option-9");
+            let selectT5Model = document.getElementById("selectT5Model");
+            if (checkBoxT5.checked) {
+                selectT5Model.disabled = false;
+            }
+            if (!checkBoxT5.checked) {
+                selectT5Model.disabled = true;
+            }
+            let checkBoxBART = document.getElementById("option-10");
+            let selectBartModel = document.getElementById("selectBartModel");
+            if (checkBoxBART.checked) {
+                selectBartModel.disabled = false;
+            }
+            if (!checkBoxBART.checked) {
+                selectBartModel.disabled = true;
+            }
+            let checkBoxPegasus = document.getElementById("option-11");
+            let selectPegasusModel = document.getElementById("selectPegasusModel");
+            if (checkBoxPegasus.checked) {
+                selectPegasusModel.disabled = false;
+            }
+            if (!checkBoxPegasus.checked) {
+                selectPegasusModel.disabled = true;
+            }
+        });
+
+    </script>
+
+    <form method="POST" action="index.html">
+        <h1>Summarization-Algorithms Playground </h1>
+        <div class="selectAlgosContainer">
+            <div class="extractContainer">
+                <div class="extractGridContainer">
+                    <div class="extractHeadlineContainer">
+                        <a class="extractHeadline"> Extractive Summarization</a>
+                        <button class="extractHelpButton" name="extractHelp" ><i class="fa fa-question"></i></button>
+                    </div>
+
+                    <input type="checkbox" name="selectLS" id="option-1" {{ "checked" if data['box1'] == True }}>
+                    <input type="checkbox" name="selectLSA" id="option-2" {{ "checked" if data['box2'] == True }}>
+                    <input type="checkbox" name="selectKL" id="option-3" {{ "checked" if data['box3'] == True }}>
+                    <input type="checkbox" name="selectBSUM" id="option-4" {{ "checked" if data['box4'] == True }}>
+                    <input type="checkbox" name="selectTF" id="option-5" {{ "checked" if data['box5'] == True }}>
+                    <input type="checkbox" name="selectWTF" id="option-6" {{ "checked" if data['box6'] == True }}>
+                    <input type="checkbox" name="selectTR" id="option-7" {{ "checked" if data['box7'] == True }}>
+                    <input type="checkbox" name="selectFM" id="option-8" {{ "checked" if data['box8'] == True }}>
+                    <label for="option-1" class="option option-1"><span>Luhn Summarizer</span></label>
+                    <label for="option-2" class="option option-2"><span>LSA Summarizer</span></label>
+                    <label for="option-3" class="option option-3"><span>KL-Sum Summarizer</span></label>
+                    <label for="option-4" class="option option-4"><span>BERT Summarizer</span></label>
+                    <label for="option-5" class="option option-5"><span>Weighted Term Freq.</span></label>
+                    <label for="option-6" class="option option-6"><span>TF-IDF</span></label>
+                    <label for="option-7" class="option option-7"><span>Textrank</span></label>
+                    <label for="option-8" class="option option-8"><span>Feature Mix</span></label>
+
+                    <div class="slidecontainer">
+                        <p class="sliderText">#Sentences in Summary</p>
+                        <input type="range" min="1" max="50" value="{{ data['extractSliderValue'] }}" class="slider"
+                               name="extractSlider" id="extractSlider">
+                        <p class="sliderValue"><span id="sliderValue"></span></p>
+                    </div>
+                    <script>
+                        let slider = document.getElementById("extractSlider");
+                        let output = document.getElementById("sliderValue");
+                        output.innerHTML = slider.value;
+                        slider.oninput = function () {
+                            output.innerHTML = this.value;
+                        }
+                    </script>
+
+
+
+                </div>
+            </div>
+            <div class="abstractContainer">
+                <div class="abstractGridContainer">
+                    <div class="abstractHeadlineContainer">
+                        <a class="abstractHeadline"> Abstractive Summarization</a>
+                        <button class="abstractHelpButton" name="abstractHelp" ><i class="fa fa-question"></i></button>
+                    </div>
+                    <input type="checkbox" name="selectT5" id="option-9" {{ "checked" if data['box9'] == True }}>
+                    <input type="checkbox" name="selectBART" id="option-10" {{ "checked" if data['box10'] == True }}>
+                    <input type="checkbox" name="selectPEGASUS" id="option-11" {{ "checked" if data['box11'] == True }}>
+                    <label for="option-9" class="option option-9"><span>T5 Transformer</span></label>
+                    <label for="option-10" class="option option-10"><span>BART Transformer</span></label>
+                    <label for="option-11" class="option option-11"><span>Pegasus Transformer</span></label>
+
+                    <select class="selectModelContainer" id="selectT5Model" name="selectT5Model" disabled>
+                        <option value="baseT5" {{ "selected" if data['selectedT5'] == "baseT5" }}>Model: T5-base</option>
+                        <option value="largeT5" {{ "selected" if data['selectedT5'] == "largeT5" }}>Model: T5-large</option>
+                    </select>
+                    <script>
+                        document.getElementById("option-9").addEventListener("click", actdeactSelectT5);
+                        function actdeactSelectT5() {
+                            let checkBoxT5 = document.getElementById("option-9");
+                            let selectT5Model = document.getElementById("selectT5Model");
+                            if (checkBoxT5.checked) {
+                                selectT5Model.disabled = false;
+                            }
+                            if (!checkBoxT5.checked) {
+                                selectT5Model.disabled = true;
+                            }
+                        }
+                    </script>
+
+
+                    <select class="selectModelContainer" id="selectBartModel" name="selectBartModel" disabled>
+                        <option value="largeCnnBart" {{ "selected" if data['selectedBART'] == "largeCnnBart" }}>Model: bart-large-cnn</option>
+                        <option value="largeXsumBart" {{ "selected" if data['selectedBART'] == "largeXsumBart" }}>Model: bart-large-xsum</option>
+                    </select>
+                    <script>
+                        document.getElementById("option-10").addEventListener("click", actdeactSelectBART);
+
+                        function actdeactSelectBART() {
+                            let checkBoxBART = document.getElementById("option-10");
+                            let selectBartModel = document.getElementById("selectBartModel");
+                            if (checkBoxBART.checked) {
+                                selectBartModel.disabled = false;
+                            }
+                            if (!checkBoxBART.checked) {
+                                selectBartModel.disabled = true;
+                            }
+                        }
+                    </script>
+
+                    <select class="selectModelContainer" id="selectPegasusModel" name="selectPegasusModel" disabled>
+                        <option value="largePegasus" {{ "selected" if data['selectedPegasus'] == "largePegasus" }}>Model: pegasus-large</option>
+                        <option value="largeCNNPegasus" {{ "selected" if data['selectedPegasus'] == "largeCNNPegasus" }}>Model: pegasus-cnn_dailymail</option>
+                    </select>
+                    <script>
+                        document.getElementById("option-11").addEventListener("click", actdeactSelectPegasus);
+
+                        function actdeactSelectPegasus() {
+                            let checkBoxPegasus = document.getElementById("option-11");
+                            let selectPegasusModel = document.getElementById("selectPegasusModel");
+                            if (checkBoxPegasus.checked) {
+                                selectPegasusModel.disabled = false;
+                            }
+                            if (!checkBoxPegasus.checked) {
+                                selectPegasusModel.disabled = true;
+                            }
+                        }
+                    </script>
+
+                    <div class="slidecontainer">
+                        <p class="sliderText">Length of Summary: </p>
+                        <input type="range" min="1" max="50" value="{{ data['extractSliderValue'] }}" class="slider"
+                               name="extractSlider" id="extractSlider">
+                        <p class="sliderValue"><span id="sliderValue"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-parent-Summary">
+            <div class="inputBox">
+                <textarea name="inputTextArea" class="inputTextArea" cols="62" rows="22"
+                          placeholder="Insert the text you want to summarize">{{ data["inputText"] }}</textarea>
+                <div class="buttonGroup">
+                    <button class="buttonTrash" name="submit" value="delete"><i class="fa fa-trash"></i></button>
+                    <button title="Insert default example" class="buttonExample" name="submit" value="example"><i
+                            class="fa fa-eyedropper"></i></button>
+                    <div class="buttonLoaderContainer">
+                        <button class="buttonSummarize" id="buttonSummarize" name="submit" value="summarize">Summarize
+                        </button>
+                        <div id="loaderDiv" class="loader" style="display: none;"></div>
+                    </div>
+                    <script>
+                        document.getElementById("buttonSummarize").addEventListener("click", myFunction);
+
+                        function myFunction() {
+                            let loader = document.getElementById("loaderDiv");
+                            loader.style.display = "block";
+                            setTimeout(disbaleButton, 50);
+                        }
+
+                        function disbaleButton() {
+                            let buttonSummarize = document.getElementById("buttonSummarize");
+                            buttonSummarize.style.cursor = "default";
+                            buttonSummarize.disabled = true;
+
+                        }
+                    </script>
+                </div>
+
+            </div>
+            {% if summaryResult %}
+                <div class="outputBoxWithResults">
+                    {% for key, segment in summaryResult.items() %}
+                        <div class="singleResult">
+
+                            <div class="headlineSummary">Summary: {{ key }} </div>
+                            <br>
+                            <div class="textSummary">
+                                {% for sentence in summaryResult[key] %}
+                                    {{ sentence }}<br><br>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="outputBoxInit">
+                    <div class="rectangletop"></div>
+                    <div class="rectanglemiddle"></div>
+                    <div class="rectanglebottom"></div>
+                </div>
+            {% endif %}
+
+        </div>
+    </form>
+{% endblock %}
+
