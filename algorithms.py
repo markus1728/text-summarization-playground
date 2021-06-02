@@ -5,8 +5,9 @@ from nltk import word_tokenize, sent_tokenize
 import numpy as np
 import networkx as nx
 import math
-import re
 import spacy
+import re
+
 
 # feature möglichekeiten: tf, tf-isf, textrank, senposition, occurence of entities, amount of numerslas
 
