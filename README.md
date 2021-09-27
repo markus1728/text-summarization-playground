@@ -22,4 +22,4 @@ Used libraries:
   - transformers
 
 Example:
-![Screenshot1](https://raw.githubusercontent.com/markus1728/text-summarization-playground/master/static/Screenshot1.png)
+![Screenshot2](https://raw.githubusercontent.com/markus1728/text-summarization-playground/master/static/Screenshot2.png)
