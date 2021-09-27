@@ -20,3 +20,6 @@ Used libraries:
   - numpy
   - sumy
   - transformers
+
+Example:
+![static](/static/Screenshot.png)
