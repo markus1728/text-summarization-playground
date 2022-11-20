@@ -4,14 +4,6 @@ from example_texts import *
 
 app = Flask(__name__)
 
-# length
-# mit algos genauer beschäftigen!!
-
-# waiting circle
-
-# popup explanations
-# explanation of algos
-
 @app.route('/')
 @app.route('/index.html', methods=['GET', 'POST'])
 def index():
